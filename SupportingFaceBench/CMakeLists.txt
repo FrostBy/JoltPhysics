@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
+project(SupportingFaceProbe CXX)
+set(CMAKE_CXX_STANDARD 17)
+
+add_subdirectory(${JOLT_DIR}/Build jolt)
+# Same runtime and optimization as the Jolt library (Jolt sets these for its own directory only)
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded")
+set(CMAKE_CXX_FLAGS_DISTRIBUTION "/O2 /DNDEBUG")
+add_executable(probe probe.cpp)
+target_link_libraries(probe PUBLIC Jolt)
+add_executable(pile pile.cpp)
+target_link_libraries(pile PUBLIC Jolt)
